@@ -2,53 +2,33 @@ let userScore = 0;
 let computerScore = 0;
 
 function getComputerChoice() {
-  let index = Math.floor(Math.random() * 3);
-  if (index === 0) {
-    return "rock";
-  } else if (index === 1) {
-    return "paper";
-  } else {
-    return "scissors";
+  let ch = Math.floor(Math.random() * 3);
+  switch (ch) {
+    case 0:
+      return "rock";
+    case 1:
+      return "paper";
+    case 2:
+      return "scissors";
   }
 }
 function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
 
-  let message;
-
-  if (playerSelection === "rock") {
-    if (computerSelection === "rock") {
-      message = "tie!";
-    } else if (computerSelection === "paper") {
-      message = "You lose, paper beat rock";
-      computerScore++;
-    } else {
-      message = "You won, rock beat scissors";
-      userScore++;
-    }
-  } else if (playerSelection === "paper") {
-    if (computerSelection === "paper") {
-      message = "tie";
-    } else if (computerSelection === "rock") {
-      message = "You won, paper beat rock";
-      userScore++;
-    } else {
-      message = "You lose, scissors beat paper";
-      computerScore++;
-    }
+  if (playerSelection === computerSelection) {
+    return "TIE!";
+  } else if (
+    (playerSelection === "rock" && computerSelection === "paper") ||
+    (playerSelection === "paper" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "rock")
+  ) {
+    computerScore++;
+    return `You lose, ${computerSelection} beats ${playerSelection}`;
   } else {
-    if (computerSelection === "scissors") {
-      message = "tie!";
-    } else if (computerSelection === "paper") {
-      message = "You won, scissors beat paper";
-      userScore++;
-    } else {
-      message = "You lose, rock beat scissors";
-      computerScore++;
-    }
+    userScore++;
+    return `You win, ${playerSelection} beats ${computerSelection}`;
   }
-  return message;
 }
 function playGame() {
   for (let index = 0; index < 5; index++) {
@@ -56,11 +36,17 @@ function playGame() {
     let userChoice = prompt("Rock, paper or scissors?");
     let result = playRound(userChoice, computerChoice);
     alert(result);
-    alert(
-      `Your choice was ${userChoice}, computer choice was ${computerChoice}`
-    );
+  }
+  alert("Game End");
+  alert(`Overall score, User: ${userScore}, Computer: ${computerScore}`);
+
+  if (userScore > computerScore) {
+    alert("You won");
+  } else if (userScore < computerScore) {
+    alert("You lost");
+  } else {
+    alert("Its TIE");
   }
 }
 
 playGame();
-alert(`Your score is ${userScore}, computer score is ${computerScore}`);
