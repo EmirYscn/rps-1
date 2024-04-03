@@ -7,27 +7,39 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="contestants">
-        <div class="user">
-          <div id="user-score" class="user-score">
-            <h1>User Score: 0</h1>
+    <header class="header">
+      <h1 class="title">ROCK PAPER SCISSORS</h1>
+    </header>
+    <main class="main">
+      <div class="scoreboard">
+        <h2 class="score-message">First to score 5 wins</h2>
+        <div class="scores-container">
+          <div class="score-box">
+            <div class="sign">👤</div>
+            <p class="score user-score">You: 0</p>
           </div>
-          <div>USER</div>
-        </div>
-        <div class="computer">
-          <div id="computer-score" class="computer-score">
-            <h1>Computer Score: 0</h1>
+          <div class="score-box">
+            <div class="sign">🤖</div>
+            <p class="score computer-score">Computer: 0</p>
           </div>
-          <div>Computer</div>
         </div>
       </div>
       <div class="buttons">
-        <button id="rock" class="btn">Rock</button>
-        <button id="paper" class="btn">Paper</button>
-        <button id="scissors" class="btn">Scissors</button>
+        <button class="btn rock">
+          <div class="sign">🪨</div>
+        </button>
+        <button class="btn paper">
+          <div class="sign">📃</div>
+        </button>
+        <button class="btn scissors">
+          <div class="sign">✂</div>
+        </button>
       </div>
-    </div>
+    </main>
+    <footer class="footer">
+      <p>EmirYscn</p>
+      <a href="https://github.com/EmirYscn" target="_blank">Github</a>
+    </footer>
 
     <script src="script.js"></script>
   </body>

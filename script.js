@@ -16,24 +16,23 @@ function playRound(playerSelection, computerSelection) {
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
 
-  const user_score = document.getElementById("user-score");
-  const computer_score = document.getElementById("computer-score");
+  const user_score = document.querySelector(".user-score");
+  const computer_score = document.querySelector(".computer-score");
 
   if (playerSelection === computerSelection) {
-    alert("TIE!");
+    userScore++;
+    computerScore++;
   } else if (
     (playerSelection === "rock" && computerSelection === "paper") ||
     (playerSelection === "paper" && computerSelection === "scissors") ||
     (playerSelection === "scissors" && computerSelection === "rock")
   ) {
     computerScore++;
-    alert(`You lose, ${computerSelection} beats ${playerSelection}`);
   } else {
     userScore++;
-    alert(`You win, ${playerSelection} beats ${computerSelection}`);
   }
-  user_score.textContent = `User Score: ${userScore}`;
-  computer_score.textContent = `Computer Score: ${computerScore}`;
+  user_score.textContent = `You: ${userScore}`;
+  computer_score.textContent = `Computer: ${computerScore}`;
   console.log(userScore);
   console.log(computerScore);
 }
@@ -42,41 +41,73 @@ function haveWinner() {
 }
 function checkWinner() {
   if (userScore > computerScore) {
-    alert("You won");
+    return "user";
   } else {
-    alert("You lost");
+    return "computer";
   }
-  alert("GAME END");
+}
+function endGame() {
+  let winner = checkWinner();
+  createEndGameModal(winner);
 }
 
 function playGame(choice) {
   playRound(choice, getComputerChoice());
-  if (userScore === 5 || computerScore === 5) {
-    checkWinner();
+  if (haveWinner()) {
+    endGame();
   }
 }
-
-function createDiv(result) {
-  const div = document.createElement("div");
-  div.textContent = result;
-  body.appendChild(div);
+function restartGame() {
+  location.reload();
 }
 
-const btnRock = document.getElementById("rock");
+function createEndGameModal(winner) {
+  const div = document.createElement("div");
+  const divSub = document.createElement("div");
+  const divSubMessage = document.createElement("p");
+  const button = document.createElement("button");
+  button.style.cssText =
+    "width: 80px; height: 50px; border-radius: 10px; background-color: #053e56; color: white;";
+  button.textContent = "Play Again";
+  div.style.cssText = "width; 300px";
+  divSub.style.cssText = "font-size: 80px;";
+  divSubMessage.style.cssText =
+    "color: white; font-size: 22px; font-weight: bold;";
+  if (winner === "user") {
+    divSub.textContent = "👤";
+    divSubMessage.textContent = "You Won!";
+  } else {
+    divSub.textContent = "🤖";
+    divSubMessage.textContent = "You Lost!";
+  }
+  const scoresContainer = document.querySelector(".scores-container");
+  while (scoresContainer.firstChild) {
+    scoresContainer.removeChild(scoresContainer.firstChild);
+  }
+
+  scoresContainer.appendChild(div);
+  div.appendChild(divSub);
+  divSub.appendChild(divSubMessage);
+  div.appendChild(button);
+
+  button.addEventListener("click", restartGame);
+}
+
+const btnRock = document.querySelector(".rock");
 btnRock.addEventListener("click", () => {
   console.log("rock");
   playGame("rock");
   //createDiv(result);
 });
 
-const btnPaper = document.getElementById("paper");
+const btnPaper = document.querySelector(".paper");
 btnPaper.addEventListener("click", () => {
   console.log("paper");
   playGame("paper");
   //createDiv(result);
 });
 
-const btnScissors = document.getElementById("scissors");
+const btnScissors = document.querySelector(".scissors");
 btnScissors.addEventListener("click", () => {
   console.log("scissors");
   playGame("scissors");
