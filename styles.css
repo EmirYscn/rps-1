@@ -1,0 +1,61 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 16px;
+  background: plum;
+  border: 4px solid indigo;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contestants {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 250px;
+  width: 800px;
+  border: 4px solid indigo;
+  flex: 1;
+}
+.user,
+.computer {
+  height: 300px;
+  width: 300px;
+  border: 4px solid indigo;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 250px;
+  width: 800px;
+  border: 4px solid indigo;
+  flex: 1;
+}
+.btn {
+  width: 25%;
+  height: 25%;
+  border: 4px solid indigo;
+  border-radius: 10px;
+}
+.user,
+.computer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
